@@ -5,6 +5,7 @@ import './Todo.css';
 const Todo = () => {
   const [todos, setTodos] = useState([]);
   const [task, setTask] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
 
   const addTodo = () => {
     if (task.trim() !== '') {
@@ -31,9 +32,13 @@ const Todo = () => {
     }
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div>
-      <h1>Todo List</h1>
+    <div className={`todo-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+      <h1 style={{ color: darkMode ? '#fff' : '#000' }}>Todo List</h1>
       <input
         type="text"
         value={task}
@@ -58,6 +63,10 @@ const Todo = () => {
           </li>
         ))}
       </ul>
+
+      <button className="dark-mode-toggle" onClick={toggleDarkMode}>
+        {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      </button>
     </div>
   );
 };
